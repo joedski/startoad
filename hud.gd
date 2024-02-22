@@ -13,6 +13,10 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMIDI:
+		var midi_event = event as InputEventMIDI
+		#print(midi_event)
+		#print("Channel " + str(midi_event.channel))
+		#print("Message " + str(midi_event.message))
 		match event.message:
 			MIDI_MESSAGE_TIMING_CLOCK:
 				bps_counter += 1
@@ -25,9 +29,9 @@ func _process(delta):
 
 
 func _on_bpm_timer_timeout():
-	bps = float(bps_counter) / float(24)
-	print("BPS: " + str(bps))
-	print("BPM: " + str(bps * 60))
+	bps = float(bps_counter) / float(48)
+	#print("BPS: " + str(bps))
+	#print("BPM: " + str(bps * 60))
 	$PulseAnimation.speed_scale = bps	
 	bps_counter = 0
 
